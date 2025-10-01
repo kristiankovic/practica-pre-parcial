@@ -1,0 +1,59 @@
+version: "3.9"
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: php82-apache
+    ports:
+      - "8081:80" # App en http://localhost:8080
+    volumes:
+      - .:/var/www/html # Tu código local en ./src
+
+      #el server apache depende de la db
+    depends_on:
+      db:
+        condition: service_healthy
+
+  db:
+    image: mysql:8.0
+    container_name: mysql80
+
+    #variables de entorno para configurar la base de datos
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpass
+      MYSQL_DATABASE: appdb
+      MYSQL_USER: appuser
+      MYSQL_PASSWORD: apppass
+
+    ports:
+      - "3306:3306" # Opcional exponerlo al host
+    volumes:
+      - db_data:/var/lib/mysql
+    healthcheck:
+      test: [ "CMD-SHELL", "mysqladmin ping -h localhost -prootpass || exit 1" ]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+      start_period: 10s
+
+  #otro contenedor para phpmyadmin
+  phpmyadmin:
+    image: phpmyadmin:latest
+    container_name: phpmyadmin
+    depends_on:
+      db:
+        condition: service_healthy
+
+    #variables de entorno para conectar con la db
+    environment:
+      PMA_HOST: db
+      PMA_USER: root
+      #misma contraseña que la del root de mysql
+      PMA_PASSWORD: rootpass
+    ports:
+      - "8082:80" # phpMyAdmin en http://localhost:8081
+
+volumes:
+  db_data:
