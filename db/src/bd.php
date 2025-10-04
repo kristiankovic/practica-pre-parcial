@@ -21,7 +21,7 @@ class Database{
 
             $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             
-            echo "Conexión Establecida";
+            //echo "Conexión Establecida";
         }
 
         catch(PDOException $excep){

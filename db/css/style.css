@@ -1,0 +1,77 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 1.2rem;
+}
+
+body{
+    padding: 1.5rem;
+}
+
+.caja{
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: center;
+
+
+    height: auto;
+}
+
+form legend,input {
+    margin-bottom: 1.2rem;
+    width: 700px;
+    font-size: 1.1rem;
+}
+
+form legend{
+    text-align: center;
+}
+
+form input{
+    padding: 10px;
+    border-radius: 6px;
+}
+
+form button{
+    width: 100%;
+    background-color: blue;
+    color: white;
+    height: 45px;
+}
+
+form button:hover{
+    background-color: rgb(16, 16, 160);
+    cursor: pointer;
+}
+
+.caja-mostrar-info{
+    margin-top: 2rem;
+}
+
+#info-tabla{
+    background-color: rgb(53, 53, 53);
+    text-align: center;
+    border-collapse: collapse;
+}
+
+#info-tabla tr td{
+    color: white;
+    padding: 10px;
+    border: 1px solid black;
+}
+
+#info-tabla th{
+    border: 1px solid black;
+    color: black;
+    background-color: yellow;
+    padding: 10px;
+}
+
+#info-tabla caption{
+    padding-bottom: 20px;
+}
